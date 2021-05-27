@@ -2,7 +2,7 @@
 // const difficulty_mid = 60
 // const difficulty_hard = 20
 
-import Cell from './row/Cell'
+import Cell from './cell/Cell'
 
 export const assign_values = (difficulty = 60) => {
   let solution = "534678912672195348198342567859761423426853791713924856961537284287419635345286179"
@@ -27,7 +27,6 @@ export const assign_values = (difficulty = 60) => {
                       emptyClass = {'cell'}
                       x={x}
                       y={y}
-                      value={this.state.value}
                     />)
     }
     y++
