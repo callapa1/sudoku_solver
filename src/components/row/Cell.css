@@ -1,0 +1,20 @@
+.cell {
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  font-size: 36px;
+  border: none;
+  padding: 0;
+  text-align: center;
+}
+
+.filled_cell {
+  background-color: rgb(194, 194, 194);
+  width: 60px;
+  height: 60px;
+  font-size: 36px;
+  border: none;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+}
