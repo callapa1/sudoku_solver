@@ -21,9 +21,6 @@ class App extends React.Component {
       difficulty: new_difficulty
     })
   }
-  componentDidUpdate() {
-    console.log('update app')
-  }
 
   render() {
     return (

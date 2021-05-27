@@ -9,9 +9,6 @@ class Board extends React.Component {
       difficulty: this.props.difficulty
     }
   }
-  componentDidUpdate(){
-    console.log('update board')
-  }
 
   render() {
     let cells = assign_values(this.state.difficulty)

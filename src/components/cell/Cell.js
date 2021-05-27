@@ -20,7 +20,7 @@ class Cell extends React.Component {
       <input
         key={cell.id}
         className={cell.filledClass || cell.emptyClass}
-        value={ this.state.cell_value}
+        value={cell.value}
         readOnly={cell.readonly}
         onChange={this.edit_cell}
       />
