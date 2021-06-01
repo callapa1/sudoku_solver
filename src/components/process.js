@@ -24,6 +24,7 @@ export const assign_values = (difficulty) => {
                     />)
     } else {
       cellList.push(<Cell
+                      key={i}
                       emptyClass = {'cell'}
                       x={x}
                       y={y}

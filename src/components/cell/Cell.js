@@ -8,14 +8,13 @@ class Cell extends React.Component {
     }
     this.edit_cell = this.edit_cell.bind(this)
   }
+  
   edit_cell(event) {
     let number = parseInt(event.target.value)
     let target = event.target
     this.setState({
       cell: number
     })
-    console.log(target)
-    console.log(this.state)
   }
 
   render() {
@@ -24,7 +23,7 @@ class Cell extends React.Component {
       <input
         data-x={cell.x}
         data-y={cell.y}
-        key={cell.id}
+        key={cell.i}
         className={cell.filledClass || cell.emptyClass}
         value={cell.value}
         readOnly={cell.readonly}
