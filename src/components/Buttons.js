@@ -14,18 +14,18 @@ class Buttons extends React.Component {
         <button
           onClick={this.handleDifficulty}
           className="button"
-          value={60}
-          >Easy</button>
-        <button
-          onClick={this.handleDifficulty}
-          className="button"
           value={40}
-          >Medium</button>
+        >Easy</button>
         <button
           onClick={this.handleDifficulty}
           className="button"
-          value={20}
-          >Hard</button>
+          value={60}
+        >Medium</button>
+        <button
+          onClick={this.handleDifficulty}
+          className="button"
+          value={75}
+        >Hard</button>
         </p>
       </div>
     );

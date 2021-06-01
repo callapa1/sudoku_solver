@@ -5,13 +5,10 @@ import './Board.css';
 class Board extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      difficulty: this.props.difficulty
-    }
   }
 
   render() {
-    let cells = assign_values(this.state.difficulty)
+    let cells = assign_values(this.props.difficulty)
 
     return (
       <div className="board">

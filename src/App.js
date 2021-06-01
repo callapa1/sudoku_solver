@@ -5,15 +5,12 @@ import Buttons from './components/Buttons'
 
 
 class App extends React.Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     difficulty: 60
-  //   }
-  //   this.handleDifficulty = this.handleDifficulty.bind(this)
-  // }
-  state = {
-    difficulty: 60
+  constructor() {
+    super()
+    this.state = {
+      difficulty: 30
+    }
+    this.handleDifficulty = this.handleDifficulty.bind(this)
   }
 
   handleDifficulty = (new_difficulty) => {
