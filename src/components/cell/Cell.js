@@ -10,14 +10,20 @@ class Cell extends React.Component {
   }
   edit_cell(event) {
     let number = parseInt(event.target.value)
+    let target = event.target
     this.setState({
-      cell_value: number
+      cell: number
     })
+    console.log(target)
+    console.log(this.state)
   }
+
   render() {
     const cell = this.props
     return (
       <input
+        data-x={cell.x}
+        data-y={cell.y}
         key={cell.id}
         className={cell.filledClass || cell.emptyClass}
         value={cell.value}
