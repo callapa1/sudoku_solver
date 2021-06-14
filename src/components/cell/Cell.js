@@ -9,21 +9,30 @@ class Cell extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     const solution = this.props.solution
-    for (let i=0 ; i < 81 ; i++) {
+    for (let i=0,x=0,y=0 ; i < 81 ; i++) {
+      if (y == 9) {
+        y = 0
+        x++
+      }
       if (solution[i] == " ") {
         this.state.cells.push({
                                 id: i,
                                 value: "",
-                                group: defineGroup(i)
+                                group: defineGroup(i),
+                                x: x,
+                                y: y
                               })
       } else {
         this.state.cells.push({
                                 id: i,
                                 value: parseInt(solution[i]), 
                                 original: true,
-                                group: defineGroup(i)
+                                group: defineGroup(i),
+                                x: x,
+                                y: y
                               })
       }
+      y++
     }
     function defineGroup(i) {
       let groups = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[]}
@@ -45,11 +54,26 @@ class Cell extends React.Component {
   }
   
   handleChange(event) {
+    function check_column(cell) {
+      console.log(cell)
+    }
+    function check_move(cell) {
+      const column_ok = check_column(cell)
+      // const row_ok = check_row()
+      // const group_ok = check_group()
+      if (column_ok ) { //&& row_ok && group_ok
+        return true
+      }
+      return false
+    }
     const id = event.target.id
     const number = parseInt(event.target.value)
+    let valid_move = check_move(event.target)
     let new_cells = this.state.cells
     const group = new_cells[id].group
-    new_cells[id] = {id: parseInt(id), value: number, group:group}
+    const x = new_cells[id].x
+    const y = new_cells[id].y
+    new_cells[id] = {id: parseInt(id), value: number, group:group, x:x, y:y}
     this.setState({
       cells: new_cells
     });
@@ -59,10 +83,6 @@ class Cell extends React.Component {
   render() {
     function insert_cells(data, handleChange) {
       let return_array = []
-      // Groups
-      // group_1 = [[0][0], [0][1], [0][2], [1][0], [1][1], [1][2], [2][0], [2][1], [2][2]]
-      // group_2 = [[0][3], [0][4], [0][5], [1][3], [1][4], [1][5], [2][3], [2][4], [2][5]]
-      // group_3 = [[0][6], [0][7], [0][8], [1][6], [1][7], [1][8], [2][6], [2][7], [2][8]]
       for (let i=0,x=0,y=0 ; i < 81 ; i++) {
         if (y == 9) {
           y = 0
