@@ -15,7 +15,7 @@ export const assign_values = (difficulty) => {
     }
     if (Math.floor(Math.random() * 100) >= difficulty) {
       cellList.push(<Cell
-                      key={i}
+                      id={i}
                       filledClass={'filled_cell'}
                       x={x}
                       y={y}
@@ -24,10 +24,11 @@ export const assign_values = (difficulty) => {
                     />)
     } else {
       cellList.push(<Cell
-                      key={i}
+                      id={i}
                       emptyClass = {'cell'}
                       x={x}
                       y={y}
+                      value=""
                     />)
     }
     y++
