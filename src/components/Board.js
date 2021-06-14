@@ -1,6 +1,7 @@
 import React from 'react';
 import {assign_values} from './process'
 import './Board.css';
+import Cell from './cell/Cell'
 
 class Board extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class Board extends React.Component {
 
   render() {
     function filter_solution(string, difficulty) {
-      final_string = ""
+      let final_string = ""
       for (let i=0 ; i < 81 ; i++) {
 
         if (Math.floor(Math.random() * 100) >= difficulty) {

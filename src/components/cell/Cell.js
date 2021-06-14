@@ -27,7 +27,7 @@ class Cell extends React.Component {
 
   render() {
     function insert_cells(data) {
-      return_array = []
+      let return_array = []
       // Groups
       // group_1 = [[0][0], [0][1], [0][2], [1][0], [1][1], [1][2], [2][0], [2][1], [2][2]]
       // group_2 = [[0][3], [0][4], [0][5], [1][3], [1][4], [1][5], [2][3], [2][4], [2][5]]
@@ -40,17 +40,17 @@ class Cell extends React.Component {
         }
         if (data[i].value != " ") {
           return_array.push(<input
-                              id={cell[i].id}
-                              filledClass={'filled_cell'}
+                              id={data[i].id}
+                              className={'filled_cell'}
                               x={x}
                               y={y}
                               value={data[i].value}
-                              readonly
+                              readOnly
                             />)
         } else {
           return_array.push(<input
-                              id={cell.id}
-                              emptyClass = {'cell'}
+                              id={data[i].id}
+                              className = {'cell'}
                               x={x}
                               y={y}
                               value=""
@@ -63,36 +63,10 @@ class Cell extends React.Component {
     }
     const cells_data = this.state.cells
     const renderCells = insert_cells(cells_data)
-
-
-    // const cells_data = this.state.cells
-    // const renderCells = []
-    // for (let i=0,x=0,y=0 ; i < 81 ; i++) {
-    //   if (y == 9) {
-    //     y = 0
-    //     x++
-    //   }
-    //   renderCells.push(<input
-    //                       key={cell.id}
-    //                       value={cell.value}
-    //                       data-x={cell.x}
-    //                       data-y={cell.y}
-    //                     />)
-    // }
-
     return (
       <div>
         {renderCells}
       </div>
-      // <input
-      //   data-x={cell.x}
-      //   data-y={cell.y}
-      //   key={cell.id}
-      //   className={cell.filledClass || cell.emptyClass}
-      //   value={cell.value}
-      //   readOnly={cell.readonly}
-      //   onChange={this.edit_cell}
-      // />
     );
   }
 }
