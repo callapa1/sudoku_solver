@@ -1,5 +1,4 @@
 import React from 'react';
-import {assign_values} from './process'
 import './Board.css';
 import Cell from './cell/Cell'
 
@@ -7,7 +6,6 @@ class Board extends React.Component {
   constructor(props) {
     super(props)
   }
-
   render() {
     function filter_solution(string, difficulty) {
       let final_string = ""
@@ -22,12 +20,11 @@ class Board extends React.Component {
       return final_string
     }
     let solution = "534678912672195348198342567859761423426853791713924856961537284287419635345286179"
-    let difficulty = this.props.difficulty
-    let filtered_solution = filter_solution(solution, difficulty)
+    let filtered_solution = filter_solution(solution, this.props.difficulty)
 
     return (
       <div className="board">
-        <Cell solution={filtered_solution} />
+        <Cell key={this.props.difficulty} solution={filtered_solution} full_s={solution} />
       </div>
     );
   }

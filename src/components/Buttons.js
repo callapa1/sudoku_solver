@@ -2,7 +2,7 @@ import React from 'react';
 import'./Buttons.css'
 
 class Buttons extends React.Component {
-  handleDifficulty = (event) => {
+  handleDifficulty = event => {
     let difficulty = event.target.value
     this.props.handleDifficulty(difficulty)
   }

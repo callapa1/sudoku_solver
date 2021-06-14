@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      difficulty: 5
+      difficulty: 40
     }
     this.handleDifficulty = this.handleDifficulty.bind(this)
   }
