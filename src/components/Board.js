@@ -24,11 +24,9 @@ class Board extends React.Component {
     let solution = "534678912672195348198342567859761423426853791713924856961537284287419635345286179"
     let difficulty = this.props.difficulty
     let filtered_solution = filter_solution(solution, difficulty)
-    // let cells = assign_values(this.props.difficulty)
 
     return (
       <div className="board">
-        {/* {cells} */}
         <Cell solution={filtered_solution} />
       </div>
     );

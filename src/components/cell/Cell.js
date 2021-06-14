@@ -108,9 +108,22 @@ class Cell extends React.Component {
       }
       return false
     }
+    function check_full(new_cells) {
+      let count = 0
+      new_cells.forEach(cell => {
+        if (cell.value == "") {
+          count += 1
+        }
+      })
+      if (count == 0) {
+        return true
+      }
+      return false
+    }
     const id = event.target.id
     const number = event.target.value
     let valid_move = true
+    let full_sudoku = false
     if (event.target.value.length > 1) {
       console.log('only 1 number')
       return
@@ -127,6 +140,10 @@ class Cell extends React.Component {
       this.setState({
         cells: new_cells
       });
+      full_sudoku = check_full(new_cells)
+      if (full_sudoku) {
+        console.log('YOU WON')
+      }
     } else {
       console.log('not valid')
     }
