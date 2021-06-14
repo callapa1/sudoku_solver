@@ -25,7 +25,7 @@ class Cell extends React.Component {
       } else {
         this.state.cells.push({
                                 id: i,
-                                value: parseInt(solution[i]), 
+                                value: parseInt(solution[i]),
                                 original: true,
                                 group: defineGroup(i),
                                 x: x,
@@ -52,34 +52,86 @@ class Cell extends React.Component {
       }
     }
   }
-  
+
   handleChange(event) {
-    function check_column(cell) {
-      console.log(cell)
+    function check_column(cell, cells) {
+      const cell_id = cell.id
+      const state_cell = cells[cell_id]
+      let column = []
+      cells.forEach(c => {
+        if (c.y == state_cell.y) {
+          column.push(c.value)
+        }
+      })
+      if (column.includes(parseInt(cell.value))) {
+        console.log('column wrong')
+        return false
+      }
+      return true
     }
-    function check_move(cell) {
-      const column_ok = check_column(cell)
-      // const row_ok = check_row()
-      // const group_ok = check_group()
-      if (column_ok ) { //&& row_ok && group_ok
+    function check_row(cell, cells) {
+      const cell_id = cell.id
+      const state_cell = cells[cell_id]
+      let row = []
+      cells.forEach(c => {
+        if (c.x == state_cell.x) {
+          row.push(c.value)
+        }
+      })
+      if (row.includes(parseInt(cell.value))) {
+        console.log('row wrong')
+        return false
+      }
+      return true
+    }
+    function check_group(cell, cells){
+      const cell_id = cell.id
+      const state_cell = cells[cell_id]
+      const group = []
+      cells.forEach(c => {
+        if (c.group == state_cell.group) {
+          group.push(c.value)
+        }
+      })
+      if (group.includes(parseInt(cell.value))) {
+        console.log('group wrong')
+        return false
+      }
+      return true
+    }
+    function check_move(cell, cells) {
+      const column_ok = check_column(cell, cells)
+      const row_ok = check_row(cell, cells)
+      const group_ok = check_group(cell, cells)
+      if (column_ok && row_ok && group_ok) {
         return true
       }
       return false
     }
     const id = event.target.id
-    const number = parseInt(event.target.value)
-    let valid_move = check_move(event.target)
-    let new_cells = this.state.cells
-    const group = new_cells[id].group
-    const x = new_cells[id].x
-    const y = new_cells[id].y
-    new_cells[id] = {id: parseInt(id), value: number, group:group, x:x, y:y}
-    this.setState({
-      cells: new_cells
-    });
-    console.log(this.state.cells)
+    const number = event.target.value
+    let valid_move = true
+    if (event.target.value.length > 1) {
+      console.log('only 1 number')
+      return
+    }
+    if(number != "") {
+      valid_move = check_move(event.target, this.state.cells)
+    }
+    if (valid_move) {
+      let new_cells = this.state.cells
+      const group = new_cells[id].group
+      const x = new_cells[id].x
+      const y = new_cells[id].y
+      new_cells[id] = {id: parseInt(id), value: number, group:group, x:x, y:y}
+      this.setState({
+        cells: new_cells
+      });
+    } else {
+      console.log('not valid')
+    }
   }
-  
+
   render() {
     function insert_cells(data, handleChange) {
       let return_array = []
