@@ -1,6 +1,8 @@
 import React from 'react';
 import './Board.css';
 import Cell from './cell/Cell'
+import sudokus from '../sudokus/sudokus';
+
 
 class Board extends React.Component {
   constructor(props) {
@@ -19,7 +21,11 @@ class Board extends React.Component {
       }
       return final_string
     }
-    let solution = "534678912672195348198342567859761423426853791713924856961537284287419635345286179"
+    function get_sudoku(array) {
+      const index = Math.floor(Math.random() * 100)
+      return array[index]
+    }
+    let solution = get_sudoku(sudokus)
     let filtered_solution = filter_solution(solution, this.props.difficulty)
 
     return (
