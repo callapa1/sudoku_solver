@@ -93,7 +93,7 @@ class Cell extends React.Component {
           group.push(c.value)
         }
       })
-      if (group.includes(parseInt(cell.value))) {
+      if (group.includes(parseInt(cell.value)) || group.includes(String(cell.value))) {
         console.log('group wrong')
         return false
       }
@@ -182,7 +182,6 @@ class Cell extends React.Component {
     }
     const cells_data = this.state.cells
     const renderCells = insert_cells(cells_data, this.handleChange)
-    const estate = this.state.cells
     return (
       <div>
         {renderCells}
