@@ -5,9 +5,6 @@ import sudokus from '../sudokus/sudokus';
 
 
 class Board extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     function filter_solution(string, difficulty) {
       let final_string = ""
@@ -30,7 +27,7 @@ class Board extends React.Component {
 
     return (
       <div className="board">
-        <Cell key={this.props.difficulty} solution={filtered_solution} full_s={solution} />
+        <Cell handleWin={this.props.handleWin} key={this.props.difficulty} solution={filtered_solution} full_s={solution} />
       </div>
     );
   }

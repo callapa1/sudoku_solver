@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import './Cell.css';
 
 class Cell extends React.Component {
@@ -10,7 +10,7 @@ class Cell extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     const solution = this.props.solution
     for (let i=0,x=0,y=0 ; i < 81 ; i++) {
-      if (y == 9) {
+      if (y === 9) {
         y = 0
         x++
       }
@@ -51,6 +51,10 @@ class Cell extends React.Component {
         }
       }
     }
+  }
+
+  handleWin() {
+    this.props.handleWin()
   }
 
   handleChange(event) {
@@ -111,7 +115,7 @@ class Cell extends React.Component {
     function check_full(new_cells) {
       let count = 0
       new_cells.forEach(cell => {
-        if (cell.value == "") {
+        if (cell.value === "") {
           count += 1
         }
       })
@@ -128,7 +132,7 @@ class Cell extends React.Component {
       console.log('only 1 number')
       return
     }
-    if(number != "") {
+    if(number !== "") {
       valid_move = check_move(event.target, this.state.cells)
     }
     if (valid_move) {
@@ -142,7 +146,8 @@ class Cell extends React.Component {
       });
       full_sudoku = check_full(new_cells)
       if (full_sudoku) {
-        console.log('YOU WON')
+        console.log(this.props)
+        this.props.handleWin()
       }
     } else {
       console.log('not valid')

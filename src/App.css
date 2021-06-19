@@ -4,3 +4,6 @@
   display: flex;
   flex-flow: column nowrap;
 }
+.win-text {
+  color: green;
+}
