@@ -28,14 +28,13 @@ class App extends React.Component {
     }))
   }
 
-
   render() {
     const win_text = 'You win!'
     return (
       <div className="App">
         <h1>
-          <span class="win-text"> {this.state.win && win_text} </span> 
-          Sudoku 
+          <span class="win-text"> {this.state.win && win_text} </span>
+          Sudoku
            <span class="win-text"> {this.state.win && win_text}</span>
         </h1>
         <Board handleWin={this.handleWin} difficulty={this.state.difficulty}/>
