@@ -20,11 +20,12 @@
 }
 
 .bad_cell {
-  animation: redborder 0.3s;
+  animation: redborder;
+  animation-duration: 0.3s;
   animation-iteration-count: 1;
 }
 
 @keyframes redborder {
-  from {border: 1px solid black;}
-  to {border: 1px solid red;}
+  from {background-color: white;}
+  to {background-color: red;}
 }

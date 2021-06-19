@@ -124,6 +124,7 @@ class Cell extends React.Component {
       }
       return false
     }
+    const html_cell = event.target
     const id = event.target.id
     const number = event.target.value
     let valid_move = true
@@ -150,7 +151,10 @@ class Cell extends React.Component {
         this.props.handleWin()
       }
     } else {
-      console.log('not valid')
+      html_cell.className = `${html_cell.className} bad_cell`
+      setTimeout(() => {
+        html_cell.className = html_cell.className.split(" ")[0]
+      }, 200);
     }
   }
 
@@ -174,7 +178,7 @@ class Cell extends React.Component {
         } else {
           return_array.push(<input
                               id={data[i].id}
-                              className = 'cell'
+                              className='cell'
                               x={x}
                               y={y}
                               value={data[i].value}
