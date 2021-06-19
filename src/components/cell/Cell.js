@@ -127,8 +127,13 @@ class Cell extends React.Component {
     const html_cell = event.target
     const id = event.target.id
     const number = event.target.value
+    let new_cells = this.state.cells
+    const group = new_cells[id].group
+    const x = new_cells[id].x
+    const y = new_cells[id].y
     let valid_move = true
     let full_sudoku = false
+
     if (event.target.value.length > 1) {
       console.log('only 1 number')
       return
@@ -136,15 +141,20 @@ class Cell extends React.Component {
     if(number !== "") {
       valid_move = check_move(event.target, this.state.cells)
     }
-    if (valid_move) {
-      let new_cells = this.state.cells
-      const group = new_cells[id].group
-      const x = new_cells[id].x
-      const y = new_cells[id].y
-      new_cells[id] = {id: parseInt(id), value: number, group:group, x:x, y:y}
+    if (number === "") {
+      new_cells[id] = {id: parseInt(id), value: "", group:group, x:x, y:y}
       this.setState({
         cells: new_cells
-      });
+      })
+    } else if (valid_move) {
+      // let new_cells = this.state.cells
+      // const group = new_cells[id].group
+      // const x = new_cells[id].x
+      // const y = new_cells[id].y
+      new_cells[id] = {id: parseInt(id), value: parseInt(number), group:group, x:x, y:y}
+      this.setState({
+        cells: new_cells
+      })
       full_sudoku = check_full(new_cells)
       if (full_sudoku) {
         console.log(this.props)
