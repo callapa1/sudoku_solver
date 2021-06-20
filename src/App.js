@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Board from './components/Board'
 import Buttons from './components/Buttons'
-import SolveButton from './components/SolveButton'
 
 class App extends React.Component {
   constructor() {
@@ -43,9 +42,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          <span class="win-text"> {this.state.win && win_text} </span>
+          <span className="win-text"> {this.state.win && win_text} </span>
           Sudoku
-           <span class="win-text"> {this.state.win && win_text}</span>
+           <span className="win-text"> {this.state.win && win_text}</span>
         </h1>
         <Board 
           handleWin={this.handleWin} 

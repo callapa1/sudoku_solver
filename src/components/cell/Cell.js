@@ -1,11 +1,14 @@
 import React from 'react';
+import { flushSync } from 'react-dom';
 import './Cell.css';
 
 class Cell extends React.Component {
   constructor(props) {
     super(props)
+    const solve_sudoku = this.props.solve_sudoku
     this.state = {
-      cells: []
+      cells: [],
+      solve_sudoku: solve_sudoku
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSolve = this.handleSolve.bind(this)
@@ -55,7 +58,7 @@ class Cell extends React.Component {
       }
     }
   }
-
+  
   handleChange(event) {
     function check_column(cell, cells) {
       const cell_id = cell.id
@@ -141,14 +144,16 @@ class Cell extends React.Component {
     }
     if (number === "") {
       new_cells[id] = {id: parseInt(id), value: "", group:group, x:x, y:y}
-      this.setState({
-        cells: new_cells
-      })
+      this.setState(state => ({
+        cells: new_cells,
+        solve_sudoku: state.solve_sudoku
+      }))
     } else if (valid_move) {
       new_cells[id] = {id: parseInt(id), value: parseInt(number), group:group, x:x, y:y}
-      this.setState({
-        cells: new_cells
-      })
+      this.setState(state => ({
+        cells: new_cells,
+        solve_sudoku: state.solve_sudoku
+      }))
       full_sudoku = check_full(new_cells)
       if (full_sudoku) {
         this.props.handleWin()
@@ -161,10 +166,17 @@ class Cell extends React.Component {
     }
   }
   handleSolve(){
-    if (this.props.solve_sudoku){
-      console.log('oa')
+    const full_s = this.props.full_s
+    let new_cells = this.state.cells
+
+    for (let i=0 ; i<81 ; i++) {
+      if (!new_cells[i].original) {
+        new_cells[i].value = parseInt(full_s[i])
+      }
     }
+    console.log('resolvido')
   }
+  
 
   render() {
     function insert_cells(data, handleChange) {
@@ -197,9 +209,13 @@ class Cell extends React.Component {
       }
       return return_array
     }
-    const cells_data = this.state.cells
-    const renderCells = insert_cells(cells_data, this.handleChange)
-    this.handleSolve()
+    let solve_sudoku = this.state.solve_sudoku
+    let cells_data = this.state.cells
+    let renderCells = insert_cells(cells_data, this.handleChange)
+
+    if (solve_sudoku) {
+      this.handleSolve()
+    }
     return (
       <div>
         {renderCells}
