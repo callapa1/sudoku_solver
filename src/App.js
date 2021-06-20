@@ -13,6 +13,7 @@ class App extends React.Component {
     }
     this.handleDifficulty = this.handleDifficulty.bind(this)
     this.handleWin = this.handleWin.bind(this)
+    this.handleSolve = this.handleSolve.bind(this)
   }
 
   handleDifficulty = (new_difficulty) => {
@@ -32,7 +33,7 @@ class App extends React.Component {
   handleSolve = () => {
     this.setState(state => ({
       difficulty: state.difficulty,
-      win: state.win,
+      win: false,
       solve_sudoku: true
     }))
   }
@@ -42,17 +43,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          <span className="win-text"> {this.state.win && win_text} </span>
+          <span className="win-text">{this.state.win && win_text} </span>
           Sudoku
-           <span className="win-text"> {this.state.win && win_text}</span>
+          <span className="win-text"> {this.state.win && win_text}</span>
         </h1>
-        <Board 
-          handleWin={this.handleWin} 
+        <Board
+          handleWin={this.handleWin}
           difficulty={this.state.difficulty}
           solve_sudoku={this.state.solve_sudoku}
         />
-        <Buttons 
-          handleDifficulty={this.handleDifficulty} 
+        <Buttons
+          handleDifficulty={this.handleDifficulty}
           handleSolve={this.handleSolve}
         />
       </div>

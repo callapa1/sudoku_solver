@@ -1,5 +1,4 @@
 import React from 'react';
-import { flushSync } from 'react-dom';
 import './Cell.css';
 
 class Cell extends React.Component {
@@ -58,7 +57,7 @@ class Cell extends React.Component {
       }
     }
   }
-  
+
   handleChange(event) {
     function check_column(cell, cells) {
       const cell_id = cell.id
@@ -166,17 +165,19 @@ class Cell extends React.Component {
     }
   }
   handleSolve(){
+    console.log('resolvido')
     const full_s = this.props.full_s
     let new_cells = this.state.cells
-
     for (let i=0 ; i<81 ; i++) {
       if (!new_cells[i].original) {
         new_cells[i].value = parseInt(full_s[i])
       }
     }
-    console.log('resolvido')
+    this.setState(state =>({
+      cells: new_cells,
+      solve_sudoku: state.solve_sudoku
+    }))
   }
-  
 
   render() {
     function insert_cells(data, handleChange) {
@@ -188,6 +189,7 @@ class Cell extends React.Component {
         }
         if (data[i].value != "" && data[i].original) {
           return_array.push(<input
+                              key={data[i].id}
                               id={data[i].id}
                               className='filled_cell'
                               x={x}
@@ -197,6 +199,7 @@ class Cell extends React.Component {
                             />)
         } else {
           return_array.push(<input
+                              key={data[i].id}
                               id={data[i].id}
                               className='cell'
                               x={x}
@@ -209,13 +212,11 @@ class Cell extends React.Component {
       }
       return return_array
     }
-    let solve_sudoku = this.state.solve_sudoku
-    let cells_data = this.state.cells
-    let renderCells = insert_cells(cells_data, this.handleChange)
-
-    if (solve_sudoku) {
+    if (this.state.solve_sudoku) {
       this.handleSolve()
     }
+    let renderCells = insert_cells(this.state.cells, this.handleChange)
+
     return (
       <div>
         {renderCells}
