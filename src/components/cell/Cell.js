@@ -8,8 +8,8 @@ class Cell extends React.Component {
       cells: []
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSolve = this.handleSolve.bind(this)
     const solution = this.props.solution
-    const full_s = this.props.full_s
 
     for (let i=0,x=0,y=0 ; i < 81 ; i++) {
       if (y === 9) {
@@ -20,6 +20,7 @@ class Cell extends React.Component {
         this.state.cells.push({
                                 id: i,
                                 value: "",
+                                original: false,
                                 group: defineGroup(i),
                                 x: x,
                                 y: y
@@ -133,7 +134,6 @@ class Cell extends React.Component {
     let full_sudoku = false
 
     if (event.target.value.length > 1) {
-      console.log('only 1 number')
       return
     }
     if(number !== "") {
@@ -145,17 +145,12 @@ class Cell extends React.Component {
         cells: new_cells
       })
     } else if (valid_move) {
-      // let new_cells = this.state.cells
-      // const group = new_cells[id].group
-      // const x = new_cells[id].x
-      // const y = new_cells[id].y
       new_cells[id] = {id: parseInt(id), value: parseInt(number), group:group, x:x, y:y}
       this.setState({
         cells: new_cells
       })
       full_sudoku = check_full(new_cells)
       if (full_sudoku) {
-        console.log(this.props)
         this.props.handleWin()
       }
     } else {
@@ -163,6 +158,11 @@ class Cell extends React.Component {
       setTimeout(() => {
         html_cell.className = html_cell.className.split(" ")[0]
       }, 200);
+    }
+  }
+  handleSolve(){
+    if (this.props.solve_sudoku){
+      console.log('oa')
     }
   }
 
@@ -199,6 +199,7 @@ class Cell extends React.Component {
     }
     const cells_data = this.state.cells
     const renderCells = insert_cells(cells_data, this.handleChange)
+    this.handleSolve()
     return (
       <div>
         {renderCells}

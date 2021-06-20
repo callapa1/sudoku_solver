@@ -26,7 +26,13 @@ class Board extends React.Component {
 
     return (
       <div className="board">
-        <Cell handleWin={this.props.handleWin} key={this.props.difficulty} solution={filtered_solution} full_s={solution} />
+        <Cell
+          handleWin={this.props.handleWin}
+          key={this.props.difficulty}
+          solution={filtered_solution}
+          full_s={solution}
+          solve_sudoku={this.props.solve_sudoku}
+        />
       </div>
     );
   }
