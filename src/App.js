@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Board from './components/Board'
 import Buttons from './components/Buttons'
-
+import SolveButton from './components/SolveButton'
 
 class App extends React.Component {
   constructor() {
@@ -27,6 +27,9 @@ class App extends React.Component {
       win: !state.win
     }))
   }
+  handleSolve = () => {
+    console.log("hola")
+  }
 
   render() {
     const win_text = 'You win!'
@@ -37,8 +40,8 @@ class App extends React.Component {
           Sudoku
            <span class="win-text"> {this.state.win && win_text}</span>
         </h1>
-        <Board handleWin={this.handleWin} difficulty={this.state.difficulty}/>
-        <Buttons handleDifficulty={this.handleDifficulty} />
+        <Board handleWin={this.handleWin} difficulty={this.state.difficulty} />
+        <Buttons handleDifficulty={this.handleDifficulty} handleSolve={this.handleSolve} />
       </div>
     );
   }

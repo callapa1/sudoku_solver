@@ -3,7 +3,6 @@ import './Board.css';
 import Cell from './cell/Cell'
 import sudokus from '../sudokus/sudokus';
 
-
 class Board extends React.Component {
   render() {
     function filter_solution(string, difficulty) {

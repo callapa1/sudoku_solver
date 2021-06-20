@@ -9,6 +9,8 @@ class Cell extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     const solution = this.props.solution
+    const full_s = this.props.full_s
+
     for (let i=0,x=0,y=0 ; i < 81 ; i++) {
       if (y === 9) {
         y = 0
@@ -51,10 +53,6 @@ class Cell extends React.Component {
         }
       }
     }
-  }
-
-  handleWin() {
-    this.props.handleWin()
   }
 
   handleChange(event) {
